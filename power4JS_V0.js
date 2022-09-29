@@ -1,5 +1,5 @@
 // create the initial tab with postion (can be E (like Empty), or R (Red) or Y (Yellow))
-
+console.log("tttttttttttttttttttttttttttt");
 let gameGrid = [
     ['E', 'E', 'E', 'E', 'E', 'E', 'E'],
     ['E', 'E', 'R', 'E', 'E', 'E', 'E'],

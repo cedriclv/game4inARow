@@ -29,21 +29,29 @@ let gameGrid = [
 
 // function to check if a column can receive a pawn and to color 
 //in green when we over or red if not available
-function greenRedFlagColumn(gridInput, lineAboveDomOutput) {
+function greenRedFlagColumn(gridInput, lineAboveDomOutput, colorInGame) {
     for (let column = 0; column < 7; column++) {
         //        console.log(gridInput[0][column]);
         //        console.log(`gridInput[0][${column}]`);
         if (gridInput[0][column] === 'Y' || gridInput[0][column] === 'R') {
             //            console.log("pass en b");
-            lineAboveDomOutput[0][column].classList.add("redLight");
+            //            lineAboveDomOutput[0][column].classList.add("redLight");
         }
         if (gridInput[0][column] === "E") {
             //            console.log("pass en c");
-            lineAboveDomOutput[0][column].classList.add("greenLight");
+            lineAboveDomOutput[0][column].classList.add("okToPlay");
+            lineAboveDomOutput[0][column].textContent = '=>';
+            if (colorInGame === 'R') {
+                lineAboveDomOutput[0][column].classList.add("circleOKRed");
+            } else {
+                lineAboveDomOutput[0][column].classList.add("circleOKYellow");
+            }
+        } else {
+            lineAboveDomOutput[0][column].style.display = "none";
         }
     }
 }
-
+// mettre la couleur en jeu clignotant au dessus des colonnes ou on peut jouersi on peut jouer;
 
 
 // function to feed the DOM according to the gameGrid array
@@ -66,4 +74,4 @@ function feedTheGrid(gridInput, gridDomOutput) {
 
 
 feedTheGrid(gameGrid, gameStage);
-greenRedFlagColumn(gameGrid, lineAboveStage);
+greenRedFlagColumn(gameGrid, lineAboveStage, 'Y');

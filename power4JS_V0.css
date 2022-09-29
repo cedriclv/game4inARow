@@ -19,6 +19,9 @@
     /* border: red 1px solid; */
     aspect-ratio: 1;
     background-color: rgb(36, 36, 211);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .enterGame {
@@ -32,6 +35,9 @@
     border-radius: 50%;
     margin: auto;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .circleYellow {
@@ -42,14 +48,34 @@
     background-color: rgb(225, 60, 60);
 }
 
-.greenLight {
-    background-color: rgba(47, 223, 47, 0.281);
+.okToPlay {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: flex;
+    padding: 3px;
+    -webkit-transform: rotate(45deg);
     animation: faddingFunction 3s linear infinite;
+    transform: rotate(90deg);
+    font-size: 100%;
+    font-weight: bolder;
+
 }
 
-.redLight {
-    background-color: rgba(220, 13, 27, 0.171);
-    animation: faddingFunction 3s linear infinite;
+.circleOKYellow {
+    background-color: yellow;
+    color: blue;
+}
+
+.circleOKRed {
+    background-color: red;
+    color: blue;
+}
+
+@media screen and (min-width:800px) {
+    .okToPlay {
+        font-size: 3rem;
+    }
+
 }
 
 @keyframes faddingFunction {
