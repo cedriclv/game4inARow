@@ -51,7 +51,6 @@ function greenRedFlagColumn(gridInput, lineAboveDomOutput, colorInGame) {
         }
     }
 }
-// mettre la couleur en jeu clignotant au dessus des colonnes ou on peut jouersi on peut jouer;
 
 
 // function to feed the DOM according to the gameGrid array
@@ -71,6 +70,12 @@ function feedTheGrid(gridInput, gridDomOutput) {
         }
     }
 }
+
+// function to re-start and clean up  the grids 
+// and add a button start (button start/restart)
+
+
+
 
 
 feedTheGrid(gameGrid, gameStage);
