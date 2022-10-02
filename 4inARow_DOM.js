@@ -125,6 +125,7 @@ function playAPawn() {
             feedTheGrid(gameGrid, gameStage);
         }
         if (colorInGame === 'Y') { colorInGame = 'R'; } else { colorInGame = 'Y'; }
+        greenRedFlagColumn(gameGrid, lineAboveStage, colorInGame);
     })
 
 }
