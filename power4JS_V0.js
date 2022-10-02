@@ -29,8 +29,9 @@ function addPawn(color, pawnColumn) {
     // once the latest empty space is found, the pawn is place in it 
     if (emptySpaceFound) {
         console.log(`gameGrid[row][column] :, gameGrid[${indexLatestRowAvailable}][${lookedColumn}]`);
-        console.log("indexLatestRowAvailable : ", indexLatestRowAvailable)
+        //console.log("indexLatestRowAvailable : ", indexLatestRowAvailable)
         gameGrid[indexLatestRowAvailable][lookedColumn] = color;
+        console.log(gameGrid[indexLatestRowAvailable][lookedColumn]);
     }
 }
 //console.log("////// Before : //////");

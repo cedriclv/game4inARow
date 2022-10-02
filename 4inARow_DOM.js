@@ -1,5 +1,5 @@
 // parsing of the DOM 
-
+let colorInGame = 'Y';
 const gameStageInit = document.querySelectorAll(".gameStage :first-child");
 
 const gameStage = [
@@ -18,7 +18,7 @@ const lineAboveStage = [
 ];
 
 
-let gameGrid = [
+/*let*/ gameGrid = [
     ['Y', 'Y', 'Y', 'Y', 'Y', 'E', 'E'],
     ['E', 'E', 'R', 'E', 'E', 'E', 'E'],
     ['E', 'Y', 'R', 'R', 'E', 'E', 'R'],
@@ -31,14 +31,17 @@ let gameGrid = [
 //in green when we over or red if not available
 function greenRedFlagColumn(gridInput, lineAboveDomOutput, colorInGame) {
     for (let column = 0; column < 7; column++) {
+        lineAboveDomOutput[0][column].classList.remove("circleOKYellow")
+        lineAboveDomOutput[0][column].classList.remove("circleOKRed")
+        lineAboveDomOutput[0][column].style.display = "initial";
         //        console.log(gridInput[0][column]);
         //        console.log(`gridInput[0][${column}]`);
         if (gridInput[0][column] === 'Y' || gridInput[0][column] === 'R') {
-            //            console.log("pass en b");
+            console.log("pass en b");
             //            lineAboveDomOutput[0][column].classList.add("redLight");
         }
         if (gridInput[0][column] === "E") {
-            //            console.log("pass en c");
+            console.log("pass en c");
             lineAboveDomOutput[0][column].classList.add("okToPlay");
             lineAboveDomOutput[0][column].textContent = '=>';
             if (colorInGame === 'R') {
@@ -85,26 +88,47 @@ buttonStart.addEventListener("click", restart);
 
 
 function restart() {
-    console.log("ok fonction restart");
-    cleanGrid();
+    //    console.log("ok fonction restart");
+    colorInGame = 'Y';
+    cleanGrid(gameGrid);
     feedTheGrid(gameGrid, gameStage);
+    greenRedFlagColumn(gameGrid, lineAboveStage, 'Y');
 }
 
 
 // function to cleanup the grid => function ok
 
-function cleanGrid() {
-    for (let row = 0; row < gameGrid.length; row++) {
-        for (let column = 0; column < gameGrid[row].length; column++) {
-            gameGrid[row][column] = 'E';
+function cleanGrid(gridToClean) {
+    for (let row = 0; row < gridToClean.length; row++) {
+        for (let column = 0; column < gridToClean[row].length; column++) {
+            gridToClean[row][column] = 'E';
         }
     }
-    console.log("ok cleanGrid");
-    console.log(gameGrid);
+    //    console.log("ok cleanGrid");
+    //    console.log(gridToClean);
 }
 
-console.log(gameGrid);
+//console.log(gameGrid);
 
+// function to put a pawn in an allowed column
+function playAPawn() {
+    // click on a column on the line above stage,if the column is free
+    // this put a pawn in the deepest available cell
+    document.addEventListener("click", function (event) {
+        console.log(event.target);
+        console.log(parseInt(event.target.id));
+        console.log(typeof (parseInt(event.target.id)));
+        if (event.target.classList.contains('okToPlay')) {
+            console.log('y plus qu a lancer la fonction de depose du pion !');
+            addPawn(colorInGame, parseInt(event.target.id));
+            console.log(gameGrid);
+            feedTheGrid(gameGrid, gameStage);
+        }
+        if (colorInGame === 'Y') { colorInGame = 'R'; } else { colorInGame = 'Y'; }
+    })
 
+}
+
+playAPawn();
 feedTheGrid(gameGrid, gameStage);
 greenRedFlagColumn(gameGrid, lineAboveStage, 'Y');
