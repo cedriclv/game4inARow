@@ -59,6 +59,8 @@ function feedTheGrid(gridInput, gridDomOutput) {
         for (let column = 0; column < 7; column++) {
             //        console.log(gridInput[row][column]);
             //        console.log(`gridInput[${row}][${column}]`);
+            gridDomOutput[row][column].classList.remove("circleYellow");
+            gridDomOutput[row][column].classList.remove("circleRed");
             if (gridInput[row][column] === 'Y') {
                 //            console.log("pass en b");
                 gridDomOutput[row][column].classList.add("circleYellow");
@@ -69,13 +71,39 @@ function feedTheGrid(gridInput, gridDomOutput) {
             }
         }
     }
+    console.log("ok feedTheGrid");
+    console.log(gridDomOutput);
 }
 
 // function to re-start and clean up  the grids 
 // and add a button start (button start/restart)
 
+const buttonStart = document.getElementById("submitBtn");
+console.log(buttonStart);
+
+buttonStart.addEventListener("click", restart);
 
 
+function restart() {
+    console.log("ok fonction restart");
+    cleanGrid();
+    feedTheGrid(gameGrid, gameStage);
+}
+
+
+// function to cleanup the grid => function ok
+
+function cleanGrid() {
+    for (let row = 0; row < gameGrid.length; row++) {
+        for (let column = 0; column < gameGrid[row].length; column++) {
+            gameGrid[row][column] = 'E';
+        }
+    }
+    console.log("ok cleanGrid");
+    console.log(gameGrid);
+}
+
+console.log(gameGrid);
 
 
 feedTheGrid(gameGrid, gameStage);
