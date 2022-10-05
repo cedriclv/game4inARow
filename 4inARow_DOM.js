@@ -34,14 +34,9 @@ function greenRedFlagColumn(gridInput, lineAboveDomOutput, colorInGame) {
         lineAboveDomOutput[0][column].classList.remove("circleOKYellow")
         lineAboveDomOutput[0][column].classList.remove("circleOKRed")
         lineAboveDomOutput[0][column].style.display = "initial";
-        //        console.log(gridInput[0][column]);
-        //        console.log(`gridInput[0][${column}]`);
         if (gridInput[0][column] === 'Y' || gridInput[0][column] === 'R') {
-            console.log("pass en b");
-            //            lineAboveDomOutput[0][column].classList.add("redLight");
         }
         if (gridInput[0][column] === "E") {
-            console.log("pass en c");
             lineAboveDomOutput[0][column].classList.add("okToPlay");
             lineAboveDomOutput[0][column].textContent = '=>';
             if (colorInGame === 'R') {
@@ -60,29 +55,22 @@ function greenRedFlagColumn(gridInput, lineAboveDomOutput, colorInGame) {
 function feedTheGrid(gridInput, gridDomOutput) {
     for (let row = 0; row < 6; row++) {
         for (let column = 0; column < 7; column++) {
-            //        console.log(gridInput[row][column]);
-            //        console.log(`gridInput[${row}][${column}]`);
             gridDomOutput[row][column].classList.remove("circleYellow");
             gridDomOutput[row][column].classList.remove("circleRed");
             if (gridInput[row][column] === 'Y') {
-                //            console.log("pass en b");
                 gridDomOutput[row][column].classList.add("circleYellow");
             }
             if (gridInput[row][column] === "R") {
-                //            console.log("pass en c");
                 gridDomOutput[row][column].classList.add("circleRed");
             }
         }
     }
-    console.log("ok feedTheGrid");
-    console.log(gridDomOutput);
 }
 
 // function to re-start and clean up  the grids 
 // and add a button start (button start/restart)
 
 const buttonStart = document.getElementById("submitBtn");
-console.log(buttonStart);
 
 buttonStart.addEventListener("click", restart);
 
@@ -104,26 +92,20 @@ function cleanGrid(gridToClean) {
             gridToClean[row][column] = 'E';
         }
     }
-    //    console.log("ok cleanGrid");
-    //    console.log(gridToClean);
 }
-
-//console.log(gameGrid);
 
 // function to put a pawn in an allowed column
 function playAPawn() {
     // click on a column on the line above stage,if the column is free
     // this put a pawn in the deepest available cell
     document.addEventListener("click", function (event) {
-        console.log(event.target);
-        console.log(parseInt(event.target.id));
-        console.log(typeof (parseInt(event.target.id)));
         if (event.target.classList.contains('okToPlay')) {
-            console.log('y plus qu a lancer la fonction de depose du pion !');
             addPawn(colorInGame, parseInt(event.target.id));
-            console.log(gameGrid);
             feedTheGrid(gameGrid, gameStage);
         }
+        if (checkAllWinner() === false) {
+            console.log('PERDU');
+        } else { alert('GAGNE'); }
         if (colorInGame === 'Y') { colorInGame = 'R'; } else { colorInGame = 'Y'; }
         greenRedFlagColumn(gameGrid, lineAboveStage, colorInGame);
     })
