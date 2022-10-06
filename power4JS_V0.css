@@ -1,5 +1,18 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: #1c63f3;
+    color: #f7a800;
+    height: 50%;
+    border-radius: 50%;
+    margin: 2rem;
+
+}
+
 .gameField {
-    width: 80%;
+    width: 95%;
     aspect-ratio: 1;
     margin-inline: auto;
 }
@@ -11,14 +24,14 @@
     grid-template-rows: repeat(7, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    column-gap: 0.5%;
-    row-gap: 0.5%;
+    column-gap: 0%;
+    row-gap: 0%;
 }
 
 .case {
     /* border: red 1px solid; */
     aspect-ratio: 1;
-    background-color: rgb(36, 36, 211);
+    background-color: #1c63f3;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,21 +44,22 @@
 .circle {
     height: 80%;
     aspect-ratio: 1;
-    background-color: grey;
+    background-color: #f7f7f7;
     border-radius: 50%;
     margin: auto;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 0;
 }
 
 .circleYellow {
-    background-color: rgb(232, 232, 93);
+    background-color: #f7a800;
 }
 
 .circleRed {
-    background-color: rgb(225, 60, 60);
+    background-color: #f60001;
 }
 
 .okToPlay {
@@ -62,12 +76,12 @@
 }
 
 .circleOKYellow {
-    background-color: yellow;
+    background-color: #f7a800;
     color: blue;
 }
 
 .circleOKRed {
-    background-color: red;
+    background-color: #f60001;
     color: blue;
 }
 
@@ -85,17 +99,31 @@
 }
 
 .boardBelowGameField {
-    height: 50px;
-    width: 80%;
-    background-color: red;
+    height: 70px;
+    width: 95%;
+    background-color: whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#submitBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: #1c63f3;
+    color: #f7a800;
+    height: 70%;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    margin: 2rem;
 }
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: whitesmoke;
 
 }

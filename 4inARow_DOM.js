@@ -1,3 +1,6 @@
+console.log('passe par DOM JS');
+
+
 // parsing of the DOM 
 let colorInGame = 'Y';
 const gameStageInit = document.querySelectorAll(".gameStage :first-child");
