@@ -4,7 +4,8 @@ console.log('passe par DOM JS');
 // parsing of the DOM 
 let colorInGame = 'Y';
 const gameStageInit = document.querySelectorAll(".gameStage :first-child");
-
+console.log("////////////////");
+console.log(gameStageInit);
 const gameStage = [
     Array.from(gameStageInit).slice(0, 7),
     Array.from(gameStageInit).slice(7, 14),
@@ -101,18 +102,20 @@ function cleanGrid(gridToClean) {
 function playAPawn() {
     // click on a column on the line above stage,if the column is free
     // this put a pawn in the deepest available cell
-    document.addEventListener("click", function (event) {
-        if (event.target.classList.contains('okToPlay')) {
-            addPawn(colorInGame, parseInt(event.target.id));
-            feedTheGrid(gameGrid, gameStage);
-        }
-        if (checkAllWinner() === false) {
-            console.log('PERDU');
-        } else { alert('GAGNE'); }
-        if (colorInGame === 'Y') { colorInGame = 'R'; } else { colorInGame = 'Y'; }
-        greenRedFlagColumn(gameGrid, lineAboveStage, colorInGame);
-    })
+    lineAboveStageInit.forEach(element => { element.addEventListener("click", addEventToLineAboveStage); });
 
+}
+
+function addEventToLineAboveStage(event) {
+    if (event.target.classList.contains('okToPlay')) {
+        addPawn(colorInGame, parseInt(event.target.id));
+        feedTheGrid(gameGrid, gameStage);
+    }
+    if (checkAllWinner() === false) {
+        console.log('PERDU');
+    } else { alert('GAGNE'); }
+    if (colorInGame === 'Y') { colorInGame = 'R'; } else { colorInGame = 'Y'; }
+    greenRedFlagColumn(gameGrid, lineAboveStage, colorInGame);
 }
 
 playAPawn();
