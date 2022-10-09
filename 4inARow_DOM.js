@@ -1,11 +1,9 @@
-console.log('passe par DOM JS');
 
 
 // parsing of the DOM 
 let colorInGame = 'Y';
 const gameStageInit = document.querySelectorAll(".gameStage :first-child");
-console.log("////////////////");
-console.log(gameStageInit);
+
 const gameStage = [
     Array.from(gameStageInit).slice(0, 7),
     Array.from(gameStageInit).slice(7, 14),
@@ -19,16 +17,6 @@ const lineAboveStageInit = document.querySelectorAll(".enterGame :first-child");
 
 const lineAboveStage = [
     Array.from(lineAboveStageInit).slice(0, 7)
-];
-
-
-/*let*/ gameGrid = [
-    ['Y', 'Y', 'Y', 'Y', 'Y', 'E', 'E'],
-    ['E', 'E', 'R', 'E', 'E', 'E', 'E'],
-    ['E', 'Y', 'R', 'R', 'E', 'E', 'R'],
-    ['E', 'Y', 'E', 'R', 'R', 'R', 'E'],
-    ['E', 'Y', 'R', 'Y', 'R', 'R', 'R'],
-    ['R', 'Y', 'Y', 'R', 'Y', 'E', 'R']
 ];
 
 // function to check if a column can receive a pawn and to color 

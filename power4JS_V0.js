@@ -1,24 +1,21 @@
 // create the initial tab with postion (can be E (like Empty), or R (Red) or Y (Yellow))
 let gameGrid = [
     ['E', 'E', 'E', 'E', 'E', 'E', 'E'],
-    ['E', 'E', 'R', 'E', 'E', 'E', 'E'],
-    ['E', 'Y', 'R', 'R', 'E', 'E', 'R'],
-    ['E', 'Y', 'E', 'R', 'R', 'R', 'E'],
-    ['E', 'Y', 'R', 'Y', 'R', 'R', 'R'],
-    ['R', 'Y', 'Y', 'R', 'Y', 'E', 'R']
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E']
 ];
 
-//console.log(gameGrid[5][1]);
 
-// function to check in which cell space is available to store a pawn ==> FONCTION OK
+// function to check in which cell space is available to store a pawn
 function addPawn(color, pawnColumn) {
     let lookedColumn = pawnColumn;
     let indexLatestRowAvailable = null;
     let emptySpaceFound = false;
     for (let row = 0; row < gameGrid.length; row++) {
-        //console.log("\n");
         for (let column = 0; column < gameGrid[row].length; column++) {
-            //  console.log(gameGrid[row][column]);
             if (gameGrid[row][column] === "E" && column === lookedColumn) {
                 indexLatestRowAvailable = row;
                 emptySpaceFound = true;
@@ -27,16 +24,12 @@ function addPawn(color, pawnColumn) {
     }
     // once the latest empty space is found, the pawn is place in it 
     if (emptySpaceFound) {
-        //        console.log(`gameGrid[row][column] :, gameGrid[${indexLatestRowAvailable}][${lookedColumn}]`);
-        //console.log("indexLatestRowAvailable : ", indexLatestRowAvailable)
         gameGrid[indexLatestRowAvailable][lookedColumn] = color;
-        //        console.log(gameGrid[indexLatestRowAvailable][lookedColumn]);
         //check if 4 pawin a row after placing the pawn
-
     }
 }
 
-// function to check if a row contains 'YYYY' or 'RRRR'==> FONCTION OK
+// function to check if a row contains 'YYYY' or 'RRRR'
 function checkRowsWinner() {
     let winnerFound = false;
     let winnerColor = 'Y';
@@ -49,7 +42,6 @@ function checkRowsWinner() {
                 if (rollingPawnFound === 4) {
                     winnerFound = true;
                     winnerColor = gameGrid[row][column];
-                    console.log('gagné dans checkRowsWinner pour ${winnerColor}');
                     return winnerColor;
                 }
             }
@@ -62,7 +54,7 @@ function checkRowsWinner() {
     return false;
 }
 //////////////////////////////////////////////////////////////////////////
-// function to create to check if a column contains 'YYYY' or 'RRRR'  ==> FONCTION OK;
+// function to create to check if a column contains 'YYYY' or 'RRRR'
 function checkColumnsWinner() {
     let winnerFound = false;
     let winnerColor = 'Y';
@@ -73,10 +65,8 @@ function checkColumnsWinner() {
                 rollingPawnFound++;
                 // once the latest empty space is found, the pawn is place inside 
                 if (rollingPawnFound === 4) {
-                    //   console.log("passe par condition finale");
                     winnerFound = true;
                     winnerColor = gameGrid[row][column];
-                    //   console.log('gagné dans checkColumnsWinner pour ${winnerColor}');
                     return winnerColor;
                 }
             }
@@ -89,7 +79,7 @@ function checkColumnsWinner() {
     return false;
 }
 ////////////////////////////////////////////////////////////////////////////////////////
-// function  1 to create to check if a diagonal contains 'YYYY' or 'RRRR' ==> FONCTION OK
+// function  1 to create to check if a diagonal contains 'YYYY' or 'RRRR'
 function checkDiagLeftRightLowWinner() {
     let winnerFound = false;
     let winnerColor = 'Y';
@@ -97,24 +87,14 @@ function checkDiagLeftRightLowWinner() {
     //parsing from right to left
     let rollingPawnFound = 1;
     let offsetColumnForParsing = (gameGrid[0].length - 1)
-    //console.log("passe dans checkDiagLeftRightLowWinner");
     for (let i = 1; i < offsetColumnForParsing; i++) {
         let row = i;
         let column = 1;
-        //console.log("passe dans checkDiagLeftRightLowWinner en b");
-        //console.log(`gameGrid[row][column]: gameGrid[${row}][${column}]`);
         while (column < gameGrid[0].length && row < gameGrid.length) {
-            //console.log("passe dans checkDiagLeftRightLowWinner en c");
-            //console.log(`!!!!!!!!!!!!!!!gameGrid[row][column]: gameGrid[${row}][${column}]`);
             if ((gameGrid[row][column] === gameGrid[row - 1][column - 1]) && (gameGrid[row][column] !== 'E')) {
                 rollingPawnFound++;
                 // once the latest empty space is found, the pawn is place inside 
-                //                console.log(' en sucess (rajoute un point) Dans checkDiagLeftRightLowWinner')
-                //                console.log(`gameGrid[row][column]: gameGrid[${row}][${column}]`);
-                //                console.log(`gameGrid[row - 1][column + 1]: gameGrid[${row - 1}][${column + 1}]`);
-                //console.log(`rollingPawnFound : ${rollingPawnFound}`);
                 if (rollingPawnFound === 4) {
-                    //console.log("passe par condition finale");
                     winnerFound = true;
                     winnerColor = gameGrid[row][column];
                     return winnerColor;
@@ -126,13 +106,13 @@ function checkDiagLeftRightLowWinner() {
             row++;
             column++;
         }
-        rollingPawnFound = 1; ///  CHANGEMENT
+        rollingPawnFound = 1;
     }
 
     return false;
 }
 ////////////////////////////////////////////////////////////////////////////////////////
-// function 2 to create to check if a diagonal contains 'YYYY' or 'RRRR' ==> FONCTION OK
+// function 2 to create to check if a diagonal contains 'YYYY' or 'RRRR'
 function checkDiagLeftRightHighWinner() {
     let winnerFound = false;
     let winnerColor = 'Y';
@@ -140,24 +120,14 @@ function checkDiagLeftRightHighWinner() {
     //parsing from right to left
     let rollingPawnFound = 1;
     let offsetColumnForParsing = (gameGrid[0].length - 1)
-    //console.log("passe dans checkDiagLeftRightHighWinner");
     for (let i = 1; i < offsetColumnForParsing; i++) {
         let row = 1;
         let column = i;
-        //console.log("passe dans checkDiagLeftRightHighWinner en b");
-        //console.log(`gameGrid[row][column]: gameGrid[${row}][${column}]`);
         while (column < gameGrid[0].length && row < gameGrid.length) {
-            //console.log("passe dans checkDiagLeftRightHighWinner en c");
-            //console.log(`!!!!!!!!!!!!!!!gameGrid[row][column]: gameGrid[${row}][${column}]`);
             if ((gameGrid[row][column] === gameGrid[row - 1][column - 1]) && (gameGrid[row][column] !== 'E')) {
                 rollingPawnFound++;
                 // once the latest empty space is found, the pawn is place inside 
-                //                console.log(' en sucess (rajoute un point) Dans checkDiagLeftRightHighWinner');
-                //                console.log(`gameGrid[row][column]: gameGrid[${row}][${column}]`);
-                //                console.log(`gameGrid[row - 1][column + 1]: gameGrid[${row - 1}][${column + 1}]`);
-                //console.log(`rollingPawnFound : ${rollingPawnFound}`);
                 if (rollingPawnFound === 4) {
-                    //console.log("passe par condition finale");
                     winnerFound = true;
                     winnerColor = gameGrid[row][column];
                     return winnerColor;
@@ -169,14 +139,13 @@ function checkDiagLeftRightHighWinner() {
             row++;
             column++;
         }
-        rollingPawnFound = 1; ///  CHANGEMENT
+        rollingPawnFound = 1;
     }
-
     return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
-// function 3 to create to check if a diagonal contains 'YYYY' or 'RRRR' ==> FONCTION OK
+// function 3 to create to check if a diagonal contains 'YYYY' or 'RRRR'
 function checkDiagRightLeftLowWinner() {
     let winnerFound = false;
     let winnerColor = 'Y';
@@ -189,19 +158,12 @@ function checkDiagRightLeftLowWinner() {
         let row = i;
         let column = 5;
         while (column > 0 && row < gameGrid.length) {
-            //console.log("passe dans checkDiagRightLeftLowWinner en c");
-            //console.log(`!!!!!!!!!!!!!!!gameGrid[row][column]: gameGrid[${row}][${column}]`);
             if ((gameGrid[row][column] === gameGrid[row - 1][column + 1]) && (gameGrid[row][column] !== 'E')) {
                 rollingPawnFound++;
-                //                console.log(' Dans checkDiagRightLeftLowWinner')
-                //                console.log(`gameGrid[row][column]: gameGrid[${row}][${column}]`);
-                //                console.log(`gameGrid[row - 1][column + 1]: gameGrid[${row - 1}][${column + 1}]`);
-                //                console.log(`rollingPawnFound : ${rollingPawnFound}`);
                 // once the latest empty space is found, the pawn is place inside 
                 if (rollingPawnFound === 4) {
                     winnerFound = true;
                     winnerColor = gameGrid[row][column];
-                    console.log('gagné dans checkDiagRightLeftLowWinner pour  ${winnerColor}');
                     return winnerColor;
                 }
             }
@@ -211,14 +173,14 @@ function checkDiagRightLeftLowWinner() {
             row++;
             column--;
         }
-        rollingPawnFound = 1; ///  CHANGEMENT
+        rollingPawnFound = 1;
     }
 
     return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
-// function 4 to create to check if a diagonal contains 'YYYY' or 'RRRR' ==> FONCTION OK
+// function 4 to create to check if a diagonal contains 'YYYY' or 'RRRR'
 function checkDiagRightLeftHighWinner() {
     let winnerFound = false;
     let winnerColor = 'Y';
@@ -230,21 +192,13 @@ function checkDiagRightLeftHighWinner() {
     for (let i = 1; i < offsetColumnForParsing; i++) {
         let row = 1;
         let column = i;
-        console.log(column > 0 && row < gameGrid.length);
         while (column >= 0 && row < gameGrid.length) {
-            console.log("passe dans checkDiagRightLeftHighWinner en c");
-            console.log(`!!!!!!!!!!!!!!!gameGrid[row][column]: gameGrid[${row}][${column}]`);
             if ((gameGrid[row][column] === gameGrid[row - 1][column + 1]) && (gameGrid[row][column] !== 'E')) {
                 rollingPawnFound++;
-                //                console.log(' Dans checkDiagRightLeftHighWinner')
-                //                console.log(`gameGrid[row][column]: gameGrid[${row}][${column}]`);
-                //                console.log(`gameGrid[row - 1][column + 1]: gameGrid[${row - 1}][${column + 1}]`);
-                //                console.log(`rollingPawnFound : ${rollingPawnFound}`);
                 // once the latest empty space is found, the pawn is place inside 
                 if (rollingPawnFound === 4) {
                     winnerFound = true;
                     winnerColor = gameGrid[row][column];
-                    console.log('gagné dans checkDiagRightLeftHighWinner pour  ${winnerColor}');
                     return winnerColor;
                 }
             }
@@ -254,7 +208,7 @@ function checkDiagRightLeftHighWinner() {
             row++;
             column--;
         }
-        rollingPawnFound = 1; ///  CHANGEMENT
+        rollingPawnFound = 1;
     }
 
     return false;
@@ -274,5 +228,3 @@ function checkAllWinner() {
     }
     return win;
 }
-
-console.log(checkAllWinner());
